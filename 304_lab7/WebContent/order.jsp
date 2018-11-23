@@ -41,7 +41,10 @@
 			ResultSet set = pstmt.executeQuery();
 			if (!set.next()) {
 				out.println("Invalid customer ID");
-			} else {
+			}
+			else if(productList == null)
+				out.println("Shopping cart is empty");
+			else {
 		
 				String oid = "INSERT INTO Orders (customerId, totalAmount) Values (?,?) ";
 				PreparedStatement updateOrder = con.prepareStatement(oid, Statement.RETURN_GENERATED_KEYS);
@@ -65,12 +68,13 @@
 					double pr = Double.parseDouble(price);
 					int qty = ( (Integer)product.get(3)).intValue();
 				bought.setString(2, productId);
-				bought.setDouble(3,pr);
-				bought.setInt(4, qty);
+				bought.setDouble(4,pr);
+				bought.setInt(3, qty);
 				bought.executeUpdate();
-				String updatestmt = "UPDATE Orders SET totalAmount = totalAmount + ?";
+				String updatestmt = "UPDATE Orders SET totalAmount = totalAmount + ? WHERE orderId = ?";
 				PreparedStatement updates = con.prepareStatement(updatestmt);
 				updates.setDouble(1, pr);
+				updates.setInt(2, orderId);
 				updates.executeUpdate();
 				}
 				String res = "SELECT OrderedProduct.productId as pid, Product.productName, OrderedProduct.quantity, OrderedProduct.price, OrderedProduct.price * quantity AS subtotal FROM Product ,OrderedProduct WHERE Product.productId = OrderedProduct.productId AND orderId = ?";

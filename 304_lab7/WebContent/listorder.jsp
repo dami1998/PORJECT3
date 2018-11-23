@@ -38,7 +38,7 @@ try{
 		ResultSet rst = stmt2.executeQuery();
 	out.println("<table border=\"1\">");
 	out.println("<tr><th>Order Id</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th></tr>");
-	out.println("<tr><td>"+ s.getInt("orderId") +"</td><td>"+ s.getInt("customerId") +"</td><td>"+ s.getString("cname") +"</td><td>"+currFormat.format(s.getDouble("totalAmount"))+"</td></tr>");
+	out.println("<tr><td>"+ s.getInt("orderId") + "</td><td>"+ s.getInt("customerId") +"</td><td>"+ s.getString("cname") +"</td><td>"+currFormat.format(s.getDouble("totalAmount"))+"</td></tr>");
 	out.println("<tr align=\"right\"><td colspan=\"4\"><table border=\"1\">");
 	out.println("<th>Product Id</th> <th>Quantity</th> <th>Price</th></tr>");
 	while(rst.next()){
