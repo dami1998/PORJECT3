@@ -22,7 +22,7 @@
 		// Determine if valid customer id was entered
 		// Determine if there are products in the shopping cart
 		// If either are not true, display an error message
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_ccheung";
+		String url = "cosc304.ok.ubc.ca/srv/www/vhosts/ubc.ca/ok/cosc304/html.ssl";
 		String uid = "ccheung";
 		String pw = "22299382";
 		// Make connection
