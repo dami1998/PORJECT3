@@ -37,20 +37,20 @@
 			// Load driver class
 			NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 			if(name == null){
-				String all = "SELECT productId, productName, price FROM Product";
+				String all = "SELECT pid, pname, price FROM product";
 				PreparedStatement sall = con.prepareStatement(all);
 				ResultSet setall = sall.executeQuery();
 				out.println("<table><tr><th></th><th>Product Name</th><th>Price</th></tr>");
 				while(setall.next()){
-					out.println("<tr><td><a href=\"addcart.jsp?id=" + setall.getInt("productId") + "&name="
-							+ URLEncoder.encode(setall.getString("productName"), "Windows-1252") + "&price="
-							+ setall.getString("price") + "\">Add to Cart</a></td><td>" + setall.getString("productName")
+					out.println("<tr><td><a href=\"addcart.jsp?id=" + setall.getInt("pid") + "&name="
+							+ URLEncoder.encode(setall.getString("pname"), "Windows-1252") + "&price="
+							+ setall.getString("price") + "\">Add to Cart</a></td><td>" + setall.getString("pname")
 							+ "</td><td>" + currFormat.format(setall.getDouble("price")) + "</td></tr>");
 				}
 				out.println("</table>");
 			}
 			else{
-			String sql = "SELECT productId, productName, price FROM Product WHERE productName LIKE ? ";
+			String sql = "SELECT pid, pname, price FROM product WHERE pname LIKE ? ";
 			PreparedStatement s = con.prepareStatement(sql);
 			s.setString(1, "%"+name+"%");
 			ResultSet set = s.executeQuery();
@@ -60,9 +60,9 @@
 				out.println("Products containing '" + name + "'");
 				out.println("<table><tr><th></th><th>Product Name</th><th>Price</th></tr>");
 				while (set.next()) {
-					out.println("<tr><td><a href=\"addcart.jsp?id=" + set.getInt("productId") + "&name="
-							+ URLEncoder.encode(set.getString("productName"), "Windows-1252") + "&price="
-							+ set.getString("price") + "\">Add to Cart</a></td><td>" + set.getString("productName")
+					out.println("<tr><td><a href=\"addcart.jsp?id=" + set.getInt("pid") + "&name="
+							+ URLEncoder.encode(set.getString("pname"), "Windows-1252") + "&price="
+							+ set.getString("price") + "\">Add to Cart</a></td><td>" + set.getString("pname")
 							+ "</td><td>" + currFormat.format(set.getDouble("price")) + "</td></tr>");
 				}
 				out.println("<\table>");
